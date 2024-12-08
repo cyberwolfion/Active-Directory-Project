@@ -31,10 +31,12 @@ network:
     enp0s3:
       dhcp4: no
       addresses: [192.168.15.10/24]
-      gateway4: 192.168.15.1
       nameservers:
-        addresses: [8.8.8.8, 1.1.1.1]
-  version: 2
+          addresses: [8.8.8.8]
+      routes:
+          - to: default
+            via: 192.168.15.1      
+version: 2
 ```
 
 - Apply changes:
@@ -62,9 +64,19 @@ sudo ./splunk start --accept-license
 sudo ./splunk enable boot-start
 ```
 
+## Step 2: Install Splunk Universal Forwarder & Sysmon (Windows 10 & Windows Server)
 
+### Objective: 
+Set up the Splunk Universal Forwarder and Sysmon on Windows systems to forward security-related logs to the Splunk server for centralized monitoring and analysis.
 
+### Prerequisites:
+- Windows 10 (target-PC) IP: DHCP.
+- Windows Server IP: 192.168.15.5.
 
+### Steps (for both Windows 10 & Windows Server):
+1. Install Splunk Universal Forwarder:
+- Download and install Splunk Universal Forwarder.
+- Configure inputs.conf to send system, security, application, and Sysmon logs to Splunk:
 
 
 
